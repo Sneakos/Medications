@@ -1,0 +1,184 @@
+Nausea, Abdominal Pain, Anorexia
+Constipation, N/V, Sedation, Respiratory Depression
+Nervousness, Restlessness, Tremor
+Weakness, Musculoskeletal Pain
+N/V, Drowsiness
+Drowsiness, Confusion, Dizziness, Dry Mouth
+Constipation, Diarrhea, Belching, Flatulence
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias, Peripheral Edema
+N/V, Diarrhea
+Extrapyramidal Symptoms, Dry Mouth & Eyes, Blurred Vision, Constipation
+Altered Taste, Photophobia
+Nausea, Constipation, Dark Stools, Cramps
+Hemorrhage, Diarrhea, Rash, Fever
+Nausea, Abdominal Pain, Anorexia
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Cramps, Heartburn
+Dizziness, Drowsiness, Fatigue & Weakness
+Blurred Vision, Stinging & Eye Pain, Headache
+Blurred Vision, Stinging & Eye Pain, Headache
+Nausea, Abdominal Cramps, Diarrhea
+Constipation, Nausea, Dry Mouth
+Blurred Vision, Stinging & Eye Pain, Headache
+Nervousness, Restlessness, Tremor
+Depression, Hypertension, N/V, Hyperglycemia
+Hypokalemia, Dehydration
+Drowsiness, Confusion, Dizziness, Dry Mouth
+Weakness, Musculoskeletal Pain
+Constipation, Diarrhea, Belching, Flatulence
+Nausea, Constipation, Dark Stools, Cramps
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+N/V, Diarrhea
+Nausea, Abdominal Pain, Anorexia
+N/V, Diarrhea
+Drowsiness, Dry Mouth
+Cramps, Heartburn
+Dizziness, Headache, Diarrhea, Confusion
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+N/V, Diarrhea
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Hemorrhage, Diarrhea, Rash, Fever
+Dizziness, Headache, N/V
+Thromboembolism, Headache, Edema, Gynecomastia (Men)
+Depression, Hypertension, N/V, Hyperglycemia
+Nausea, Constipation, Dark Stools, Cramps
+Dizziness, Drowsiness, Fatigue & Weakness
+Depression, Hypertension, N/V, Hyperglycemia
+Drowsiness, Confusion, Dizziness, Dry Mouth
+Dysrhythmias, Headache, N/V
+Hypotension, Brady/Tachycardia, Headaches, N/V, Dysrhythmias, Peripheral Edema
+Drowsiness, Dry Mouth
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Nausea, Abdominal Cramps, Diarrhea
+Diarrhea, Nausea, Insomnia
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Hemorrhage, Diarrhea, Rash, Fever
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Dizziness, Headache, Diarrhea, Confusion
+Thromboembolism, Headache, Edema, Gynecomastia (Men)
+Cramps, Heartburn
+Dizziness, Headache, Diarrhea, Confusion
+Constipation, N/V, Sedation, Respiratory Depression
+Nausea, Constipation, Dark Stools, Cramps
+Drowsiness, Dry Mouth
+Gynecomastia (Men)
+Nervousness, Restlessness, Tremor
+Depression, Hypertension, N/V, Hyperglycemia
+Nausea, Constipation, Dark Stools, Cramps
+Hypokalemia, Dehydration
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Cramps, Heartburn
+Altered Taste, Photophobia
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+N&V
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+Dizziness, Headache, N/V
+Extrapyramidal Symptoms, Dry Mouth & Eyes, Blurred Vision, Constipation
+Hemorrhage, Diarrhea, Rash, Fever
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+Hypotension, Brady/Tachycardia, Headaches, N/V, Dysrhythmias, Peripheral Edema
+Hypokalemia, Dehydration
+Constipation, N/V, Sedation, Respiratory Depression
+Depression, Hypertension, N/V, Hyperglycemia
+Drowsiness, Confusion, Dizziness, Dry Mouth
+Nausea, Abdominal Pain, Anorexia
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+GI bleed, Diarrhea, Hypothroidism
+Nervousness, Restlessness, Tremor
+Nervousness, Restlessness, Tremor
+Nausea, Constipation, Dark Stools, Cramps
+Orthostatic Hypotension, Headache
+Nausea, Abdominal Pain, Anorexia
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Nausea, Abdominal Cramps, Diarrhea
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Dizziness, Headache, Diarrhea, Confusion
+Blurred Vision, Stinging & Eye Pain, Headache
+Nervousness, Restlessness, Tremor
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+N/V, Diarrhea
+Insomnia, Tachycardia
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Constipation, Nausea, Dry Mouth
+Drowsiness, Dry Mouth
+Drowsiness, Confusion, Dizziness, Dry Mouth
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias, Peripheral Edema
+Nausea, Abdominal Cramps, Diarrhea
+Thromboembolism, Headache, Edema, Gynecomastia (Men)
+Nausea, Abdominal Pain, Anorexia
+Diarrhea, Nausea, Insomnia
+Constipation, N/V, Sedation, Respiratory Depression
+Nausea, Abdominal Pain, Anorexia
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+N/V, Anorexia, Diarrhea, Anemia
+Depression, Hypertension, N/V, Hyperglycemia
+Extrapyramidal Reactions, Blurred Vision, Dry Eyes & Mouth, Drowsiness, Constipation
+Hypokalemia, Dehydration
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Nervousness, Restlessness, Tremor
+Constipation, N/V, Sedation, Respiratory Depression
+Nausea, Constipation, Dark Stools, Cramps
+N/V, Diarrhea
+Nausea, Abdominal Pain, Anorexia
+N/V, Diarrhea
+Orthostatic Hypotension, Headache
+Orthostatic Hypotension, Headache
+Orthostatic Hypotension, Headache
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+N/V, Diarrhea
+Altered Taste, Photophobia
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias, Peripheral Edema
+Dizziness, Headache, Diarrhea, Confusion
+Extrapyramidal Reactions, Blurred Vision, Dry Eyes & Mouth, Drowsiness, Constipation
+Dizziness, Drowsiness, Dry Mouth, Urinary Retention
+Constipation, N/V, Sedation, Respiratory Depression
+Dizziness, Headache, Diarrhea, Confusion
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Blurred Vision, Stinging & Eye Pain, Headache
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+Nausea, Abdominal Cramps, Diarrhea
+Nausea, Constipation, Dark Stools, Cramps
+Depression, Hypertension, N/V, Hyperglycemia
+Depression, Hypertension, N/V, Hyperglycemia
+Extrapyramidal Reactions, Blurred Vision, Dry Eyes & Moth, Drowsiness, Constipation
+Drowsiness, Dry Mouth
+Anxiety, Palpitations, Anorexia
+Nausea, Abdominal Cramps, Diarrhea
+Extrapyramidal Symptoms, Dry Mouth & Eyes, Blurred Vision, Constipation
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Weakness, Musculoskeletal Pain
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias
+Dizziness, Headache, Diarrhea, Confusion
+Weakness, Musculoskeletal Pain
+Extrapyramidal Symptoms, Dry Mouth & Eyes, Blurred Vision, Constipation
+Cramps, Heartburn
+Nausea, Abdominal Cramps, Diarrhea
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Constipation, Diarrhea, Belching, Flatulence
+Cramps, Heartburn
+Hypoglycemia, Drowsiness, Dizziness, Nausea
+Hypokalemia, Dehydration
+N/V, Diarrhea
+N/V, Anorexia, Diarrhea, Anemia
+Dizziness, Headache
+Lethargy, Drowsiness, Daytime Sedation
+Hypotension, Brady/Tachycardia, Headaches, N/V, Dysrhythmias, Peripheral Edema
+Blurred Vision, Stinging & Eye Pain, Headache
+Nervousness, Restlessness, Tremor
+Dizziness, Drowsiness, Dry Mouth, Urinary Retention
+Nausea, Abdominal Pain, Anorexia
+Blurred Vision, Stinging & Eye Pain, Headache
+Dizziness, Drowsiness, Dry Mouth, Insomnia, Tremor
+Ataxia, Confusion, Drowsiness, Behavioral Changes, Involuntary Movements, N/V
+Hypotension, Brady/Tachycardia, Headache, N/V, Dysrhythmias, Peripheral Edema
+Hypotension, Brady/Tachycardia, Headaches, N/V, Dysrhythmias, Peripheral Edema
+Nausea, Constipation, Dark Stools, Cramps
+Hemorrhage, Diarrhea, Rash, Fever
+Lethargy, Drowsiness, Daytime Sedation
