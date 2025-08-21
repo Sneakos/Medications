@@ -9,6 +9,7 @@ using System.Resources;
 using System.Globalization;
 using System.Collections.Generic;
 using System.IO;
+using System.Configuration;
 
 namespace Medications
 {
@@ -16,18 +17,19 @@ namespace Medications
     {
         #region Instance Variables
 
-        private List<string> meds, medUses, sideEffects;
-        private SortedList<string, Image> catList;
-        private Random rnd;
-        private Button btnAnswer;
-        private int totalScore, score, mode, currCat, firstCat;
-        private int MAX_SCORE = 20;
-        private Size catMedalSize = new Size(40, 40);
-        private Image dog;
-        private Mode parent;
-        private bool hardClose;
-        private ResourceManager resources;
-        private string catFileName;
+        private List<string> _meds, _medUses, _sideEffects;
+        private SortedList<string, Image> _catList;
+        private Random _rnd;
+        private Button _btnAnswer;
+        private int _totalScore, _score, _gameMode, _currCat, _firstCat;
+        private int _maxScore = 20;
+        private double _winPercent;
+        private Size _catMedalSize = new Size(40, 40);
+        private Image _dog;
+        private Mode _parent;
+        private bool _hardClose, _debugMode;
+        private ResourceManager _resources;
+        private string _catFileName, _errorFileName;
 
         #endregion
 
@@ -73,26 +75,31 @@ namespace Medications
         {
             try
             {
-                meds = new List<string>();
-                medUses = new List<string>();
-                sideEffects = new List<string>();
-                catList = new SortedList<string, Image>();
-                hardClose = true;
-                rnd = new Random();
-                totalScore = 0;
-                score = 0;
-                parent = parentForm;
-                mode = gameMode;
-                lblScore.Text = "Score: " + score + "/" + totalScore;
-                resources = new ResourceManager(typeof(Resources));
-                catFileName = @".\Files\CatsEarned" + mode + ".txt";
-                string text = File.ReadAllText(catFileName);
-                currCat = Convert.ToInt32(text.Substring(65, 2));
-                firstCat = currCat;
-                
-                #if DEBUG
-                MAX_SCORE = 5;
-                #endif
+                _errorFileName = GetErrorFileName();
+                _meds = new List<string>();
+                _medUses = new List<string>();
+                _sideEffects = new List<string>();
+                _catList = new SortedList<string, Image>();
+                _hardClose = true;
+                _rnd = new Random();
+                _totalScore = 0;
+                _score = 0;
+                _maxScore = GetMaxScore();
+                _winPercent = GetWinPercent();
+                _parent = parentForm;
+                _gameMode = gameMode;
+                lblScore.Text = "Score: " + _score + "/" + _totalScore;
+                _resources = new ResourceManager(typeof(Resources));
+                _catFileName = GetCatFileName(_gameMode);
+                string text = File.ReadAllText(_catFileName);
+                _currCat = Convert.ToInt32(text.Substring(65, 2));
+                _firstCat = _currCat;
+                _debugMode = GetDebugMode();
+
+                if (!_debugMode)
+                {                    
+                    btnResetCats.Visible = false;
+                }
 
                 PopulateMedications();
                 
@@ -104,22 +111,25 @@ namespace Medications
             }
             catch (Exception e)
             {
-                MessageBox.Show("Whoops");
-                Console.WriteLine(e);
+                MessageBox.Show("An error occured (see log)");
+                if (_errorFileName != null)
+                {
+                    File.AppendAllText(_errorFileName, DateTime.Now + Environment.NewLine + e.ToString() + Environment.NewLine);
+                }
                 Environment.Exit(1);
             }
         }
 
         private void SetupImages()
         {
-            dog = (Image)resources.GetObject("LoserDog");
-            dog = ResizeImage(dog, pbResultPicture.Width, pbResultPicture.Height);
+            _dog = (Image)_resources.GetObject("LoserDog");
+            _dog = ResizeImage(_dog, pbResultPicture.Width, pbResultPicture.Height);
 
-            if (currCat > 0)
+            if (_currCat > 0)
                 btnViewMedals.Visible = true;
 
-            ResourceSet set = resources.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
-            string currMode = "Mode" + mode;
+            ResourceSet set = _resources.GetResourceSet(CultureInfo.CurrentUICulture, true, true);
+            string currMode = "Mode" + _gameMode;
 
             foreach (DictionaryEntry entry in set)
             {
@@ -127,28 +137,28 @@ namespace Medications
                     && entry.Key.ToString().Contains("Cat")
                     && entry.Key.ToString().Contains(currMode))
                 {
-                    catList.Add(entry.Key.ToString(), (Image)entry.Value);
+                    _catList.Add(entry.Key.ToString(), (Image)entry.Value);
                 }
             }
 
-            for (int i = 0; i < currCat; i++)
+            for (int i = 0; i < _currCat; i++)
             {
-                AddCatMedal(catList.Values[i], i);
+                AddCatMedal(_catList.Values[i], i);
             }
         }
 
         private void PopulateMedications()
         {
-            string[] drugs = resources.GetString("Drugs").Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            meds.AddRange(drugs);
+            string[] drugs = _resources.GetString("Drugs").Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            _meds.AddRange(drugs);
 
 
-            string[] drugUses = resources.GetString("DrugUses").Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            medUses.AddRange(drugUses);
+            string[] drugUses = _resources.GetString("DrugUses").Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            _medUses.AddRange(drugUses);
 
 
-            string[] effects = resources.GetString("SideEffects").Split(new string[] { "\r\n" }, StringSplitOptions.None);
-            sideEffects.AddRange(effects);
+            string[] effects = _resources.GetString("SideEffects").Split(new string[] { "\r\n" }, StringSplitOptions.None);
+            _sideEffects.AddRange(effects);
         }
 
         #endregion
@@ -157,29 +167,29 @@ namespace Medications
 
         private void AddCatMedal(Image cat, int index)
         {
-            cat = ResizeImage(cat, catMedalSize.Width, catMedalSize.Height);
+            cat = ResizeImage(cat, _catMedalSize.Width, _catMedalSize.Height);
             PictureBox pbCat = new PictureBox
             {
-                Size = catMedalSize,
+                Size = _catMedalSize,
                 Image = cat
             };
             pnlCatMedals.Controls.Add(pbCat);
-            int x = (catMedalSize.Width + 10) * index % ((catMedalSize.Width + 10) * 4);
-            int y = (catMedalSize.Height + 10) * (index / 4);
+            int x = (_catMedalSize.Width + 10) * index % ((_catMedalSize.Width + 10) * 4);
+            int y = (_catMedalSize.Height + 10) * (index / 4);
             pbCat.Location = new Point(x, y);
         }
 
         public void NewQuestion()
         {
-            int randomNumber = rnd.Next(0, meds.Count);
-            int correctButton = rnd.Next(1, 5);
+            int randomNumber = _rnd.Next(0, _meds.Count);
+            int correctButton = _rnd.Next(1, 5);
 
-            string correctUse = medUses[randomNumber];
-            string correctDrug = meds[randomNumber];
-            string correctSideEffect = sideEffects[randomNumber];
-            string correctAnswer = mode == 1 ? correctDrug : mode == 2 ? correctUse : correctSideEffect;
+            string correctUse = _medUses[randomNumber];
+            string correctDrug = _meds[randomNumber];
+            string correctSideEffect = _sideEffects[randomNumber];
+            string correctAnswer = _gameMode == 1 ? correctDrug : _gameMode == 2 ? correctUse : correctSideEffect;
 
-            rtbPrompt.Text = mode == 1 ? correctUse : correctDrug;
+            rtbPrompt.Text = _gameMode == 1 ? correctUse : correctDrug;
 
             List<int> randoms = GetRandoms(correctUse, correctAnswer);
 
@@ -199,70 +209,69 @@ namespace Medications
             if (correctButton != 1)
             {
                 btnAnswer1.Text = wrongOption[randoms[0]];
-                rtbAnswer1.Text = medUses[randoms[0]];
+                rtbAnswer1.Text = _medUses[randoms[0]];
             }
             else
             {
                 btnAnswer1.Text = correctAnswer;
-                btnAnswer = btnAnswer1;
+                _btnAnswer = btnAnswer1;
                 rtbAnswer1.Text = correctUse;
             }
 
             if (correctButton != 2)
             {
                 btnAnswer2.Text = wrongOption[randoms[1]];
-                rtbAnswer2.Text = medUses[randoms[1]];
+                rtbAnswer2.Text = _medUses[randoms[1]];
             }
             else
             {
                 btnAnswer2.Text = correctAnswer;
-                btnAnswer = btnAnswer2;
+                _btnAnswer = btnAnswer2;
                 rtbAnswer2.Text = correctUse;
             }
 
             if (correctButton != 3)
             {
                 btnAnswer3.Text = wrongOption[randoms[2]];
-                rtbAnswer3.Text = medUses[randoms[2]];
+                rtbAnswer3.Text = _medUses[randoms[2]];
             }
             else
             {
                 btnAnswer3.Text = correctAnswer;
-                btnAnswer = btnAnswer3;
+                _btnAnswer = btnAnswer3;
                 rtbAnswer3.Text = correctUse;
             }
 
             if (correctButton != 4)
             {
                 btnAnswer4.Text = wrongOption[randoms[3]];
-                rtbAnswer4.Text = medUses[randoms[3]];
+                rtbAnswer4.Text = _medUses[randoms[3]];
             }
             else
             {
                 btnAnswer4.Text = correctAnswer;
-                btnAnswer = btnAnswer4;
+                _btnAnswer = btnAnswer4;
                 rtbAnswer4.Text = correctUse;
             }
 
-            #if DEBUG
-              btnAnswer.BackColor = Color.Blue;
-            #endif
+            if (_debugMode)
+                _btnAnswer.BackColor = Color.Blue;
         }
 
         private List<string> GetWrongOptions()
         {
             List<string> wrongOption;
-            if (mode == 1) //Drugs
+            if (_gameMode == 1) //Drugs
             {
-                wrongOption = meds;
+                wrongOption = _meds;
             }
-            else if (mode == 2) //Drug Uses
+            else if (_gameMode == 2) //Drug Uses
             {
-                wrongOption = medUses;
+                wrongOption = _medUses;
             }
             else //Side Effects
             {
-                wrongOption = sideEffects;
+                wrongOption = _sideEffects;
             }
 
             return wrongOption;
@@ -276,7 +285,7 @@ namespace Medications
                 int random;
                 do
                 {
-                    random = rnd.Next(0, meds.Count);
+                    random = _rnd.Next(0, _meds.Count);
                 } while (CheckDuplicates(randoms, random, correctUse, correctAnswer));
                 randoms.Add(random);
             }
@@ -291,24 +300,24 @@ namespace Medications
                 return true;
             }
 
-            if (mode == 3)
+            if (_gameMode == 3)
             {
-                if (sideEffects[random].Equals(correctAnswer))
+                if (_sideEffects[random].Equals(correctAnswer))
                     return true;
                 for (int i = 0; i < randoms.Count; i++)
                 {
-                    if (sideEffects[random].Equals(sideEffects[i]))
+                    if (_sideEffects[random].Equals(_sideEffects[i]))
                         return true;
                 }
                 return false;
             }
 
-            if (medUses[random].Equals(correctUse))
+            if (_medUses[random].Equals(correctUse))
                 return true;
 
             for (int i = 0; i < randoms.Count; i++)
             {
-                if (medUses[random].Equals(medUses[i]))
+                if (_medUses[random].Equals(_medUses[i]))
                     return true;
             }
             return false;
@@ -327,24 +336,24 @@ namespace Medications
             btnPlayAgain.Visible = true;
             pbResultPicture.Visible = true;
 
-            if (score == totalScore)
+            if (_score >= _totalScore * _winPercent)
             {
-                int index = currCat < catList.Count ? currCat : currCat - 1;
+                int index = _currCat < _catList.Count ? _currCat : _currCat - 1;
                 
-                pbResultPicture.Image = ResizeImage(catList.Values[index], pbResultPicture.Width, pbResultPicture.Height);
-                if (currCat < catList.Count)
+                pbResultPicture.Image = ResizeImage(_catList.Values[index], pbResultPicture.Width, pbResultPicture.Height);
+                if (_currCat < _catList.Count)
                 {
-                    AddCatMedal(pbResultPicture.Image, currCat);
-                    AddCatMedal(pbResultPicture.Image, currCat);
-                    AddCatMedal(pbResultPicture.Image, currCat);
-                    AddCatMedal(pbResultPicture.Image, currCat);
-                    currCat++;
-                    File.WriteAllText(catFileName, GenerateRandomString(currCat));
+                    AddCatMedal(pbResultPicture.Image, _currCat);
+                    AddCatMedal(pbResultPicture.Image, _currCat);
+                    AddCatMedal(pbResultPicture.Image, _currCat);
+                    AddCatMedal(pbResultPicture.Image, _currCat);
+                    _currCat++;
+                    File.WriteAllText(_catFileName, GenerateRandomString(_currCat));
                 }
                 btnViewMedals.Visible = true;
             }
             else
-                pbResultPicture.Image = dog;
+                pbResultPicture.Image = _dog;
         }
 
         private String GenerateRandomString(int number)
@@ -352,7 +361,7 @@ namespace Medications
             string str = "";
             int[] nums = new int[265];
             for (int i = 0; i < 265; i++)
-                nums[i] = rnd.Next(10);
+                nums[i] = _rnd.Next(10);
             if (number > 9)
                 nums[65] = number;
             else
@@ -382,7 +391,7 @@ namespace Medications
             btnAnswer3.Enabled = true;
             btnAnswer4.Enabled = true;
 
-            if (mode != 2)
+            if (_gameMode != 2)
             {
                 rtbAnswer1.Visible = false;
                 rtbAnswer2.Visible = false;
@@ -401,7 +410,51 @@ namespace Medications
             rtbPrompt.Focus();
         }
 
-#endregion
+        private string GetCatFileName(int gameMode)
+        {
+            string filesFolder = ConfigurationManager.AppSettings["FilesFolder"];
+
+            return $@"{filesFolder}\CatsEarned{gameMode}.txt";
+        }
+
+        private string GetErrorFileName()
+        {
+            return ConfigurationManager.AppSettings["ErrorFile"];
+        }
+
+        private bool GetDebugMode()
+        {
+            string debugMode = ConfigurationManager.AppSettings["Debug"];
+            return bool.Parse(debugMode);
+        }
+
+        private int GetMaxScore()
+        {
+            string maxScore = ConfigurationManager.AppSettings["QuestionsPerRound"];
+            return int.Parse(maxScore);
+        }
+
+        private double GetWinPercent()
+        {
+            string winPercent = ConfigurationManager.AppSettings["WinPercent"];
+            return double.Parse(winPercent);
+        }
+
+        private void PlayAgain()
+        {
+            _score = 0;
+            _totalScore = 0;
+
+            lblScore.Text = "Score: " + _score + "/" + _totalScore;
+
+            btnPlayAgain.Visible = false;
+            btnNext.Visible = true;
+            pbResultPicture.Visible = false;
+
+            NextQuestion();
+        }
+
+        #endregion Methods
 
         #region Events
 
@@ -417,18 +470,14 @@ namespace Medications
 
         private void BtnViewMedals_Click(object sender, EventArgs e)
         {
-            Gallery gallery = new Gallery(catList, currCat);
+            Gallery gallery = new Gallery(_catList, _currCat);
             gallery.ShowDialog();
         }
 
-
         private void BtnReset_Click(object sender, EventArgs e)
         {
-            score = 0;
-            totalScore = 0;
-            lblScore.Text = "Score: " + score + "/" + totalScore;
+            PlayAgain();
         }
-
 
         private void RtbPrompt_Enter(object sender, EventArgs e)
         {
@@ -439,25 +488,25 @@ namespace Medications
         private void BtnResetCats_Click(object sender, EventArgs e)
         {
             pnlCatMedals.Controls.Clear();
-            currCat = 0;
-            File.WriteAllText(catFileName, GenerateRandomString(currCat));
+            _currCat = 0;
+            File.WriteAllText(_catFileName, GenerateRandomString(_currCat));
 
         }
 
         private void ButtonClicked(object sender, EventArgs e)
         {
             Button btnHit = (Button)sender;
-            if (!btnHit.Equals(btnAnswer))
+            if (!btnHit.Equals(_btnAnswer))
             {
                 btnHit.BackColor = Color.Red;
             }
             else
             {
-                score++;
+                _score++;
             }
-            totalScore++;
+            _totalScore++;
 
-            btnAnswer.BackColor = Color.LightGreen;
+            _btnAnswer.BackColor = Color.LightGreen;
 
             btnAnswer1.Enabled = false;
             btnAnswer2.Enabled = false;
@@ -465,7 +514,7 @@ namespace Medications
             btnAnswer4.Enabled = false;
             btnNext.Enabled = true;
 
-            if (mode != 2)
+            if (_gameMode != 2)
             {
                 rtbAnswer1.Visible = true;
                 rtbAnswer2.Visible = true;
@@ -473,9 +522,9 @@ namespace Medications
                 rtbAnswer4.Visible = true;
             }
 
-            lblScore.Text = "Score: " + score + "/" + totalScore;
+            lblScore.Text = "Score: " + _score + "/" + _totalScore;
 
-            if (totalScore == MAX_SCORE)
+            if (_totalScore == _maxScore)
             {
                 EndGame();
             }
@@ -483,9 +532,9 @@ namespace Medications
 
         private void BtnReturnToMenu_Click(object sender, EventArgs e)
         {
-            parent.Show();
-            parent.SetFocus();
-            hardClose = false;
+            _parent.Show();
+            _parent.SetFocus();
+            _hardClose = false;
             Close();
         }
 
@@ -496,25 +545,15 @@ namespace Medications
 
         private void BtnPlayAgain_Click(object sender, EventArgs e)
         {
-
-            score = 0;
-            totalScore = 0;
-
-            lblScore.Text = "Score: " + score + "/" + totalScore;
-
-            btnPlayAgain.Visible = false;
-            btnNext.Visible = true;
-            pbResultPicture.Visible = false;
-
-            NextQuestion();
+            PlayAgain();
         }
     
         private void Game_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (hardClose)
+            if (_hardClose)
                 Environment.Exit(1);
         }
 
-        #endregion
+        #endregion Events
     }
 }

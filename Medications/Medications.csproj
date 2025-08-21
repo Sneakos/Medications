@@ -8,8 +8,9 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Medications</RootNamespace>
     <AssemblyName>Medications</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -97,8 +99,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Files\Errors.txt" />
     <Content Include="Images\LoserDog.jpg" />
-    <Content Include="Images\WinnerCat.jpg" />
     <None Include="Resources\Mode1Cat01.jpg" />
     <None Include="Resources\Mode1Cat02.jpg" />
     <None Include="Resources\Mode1Cat03.jpg" />
@@ -150,7 +152,6 @@
     <None Include="Resources\Mode3Cat07.jpg" />
     <None Include="Resources\Mode3Cat08.jpg" />
     <None Include="Resources\Mode3Cat09.jpg" />
-    <Content Include="Resources\Mode3Cat1.jpg" />
     <Content Include="Resources\Mode3Cat10.gif" />
     <Content Include="Resources\Mode3Cat11.jpg" />
     <Content Include="Resources\Mode3Cat12.jpg" />
